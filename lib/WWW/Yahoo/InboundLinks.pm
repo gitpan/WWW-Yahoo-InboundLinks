@@ -10,7 +10,7 @@ use HTTP::Headers ();
 
 use JSON ();
 
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 sub new {
 	my $class = shift;
@@ -109,12 +109,12 @@ __END__
 
 =head1 NAME
 
-WWW::Yahoo::Links - Tracking Inbound Links in Yahoo Site Explorer API
+WWW::Yahoo::InboundLinks - Tracking Inbound Links in Yahoo Site Explorer API
 
 =head1 SYNOPSIS
 
-	use WWW::Yahoo::Links;
-	my $ylinks = WWW::Yahoo::Links->new ('YahooAppId');
+	use WWW::Yahoo::InboundLinks;
+	my $ylinks = WWW::Yahoo::InboundLinks->new ('YahooAppId');
 	my %params = {
 		omit_inlinks => 'domain',
 	};
@@ -124,12 +124,12 @@ WWW::Yahoo::Links - Tracking Inbound Links in Yahoo Site Explorer API
 
 =head1 DESCRIPTION
 
-The C<WWW::Yahoo::Links> is a class implementing a interface for
+The C<WWW::Yahoo::InboundLinks> is a class implementing a interface for
 Tracking Inbound Links in Yahoo Site Explorer API.
 
 More information here: L<http://developer.yahoo.com/search/siteexplorer/V1/inlinkData.html>
 
-To use it, you should create C<WWW::Yahoo::Links> object and use its
+To use it, you should create C<WWW::Yahoo::InboundLinks> object and use its
 method get(), to query inbound links for url.
 
 It uses C<LWP::UserAgent> for making request to Yahoo and C<JSON>
@@ -139,9 +139,9 @@ for parsing response.
 
 =over 4
 
-=item  my $ylinks = WWW::Yahoo::Links->new ('YahooAppId');
+=item  my $ylinks = WWW::Yahoo::InboundLinks->new ('YahooAppId');
 
-This method constructs a new C<WWW::Yahoo::Links> object and returns it.
+This method constructs a new C<WWW::Yahoo::InboundLinks> object and returns it.
 Required parameter — Yahoo Application Id (L<http://developer.yahoo.com/faq/index.html#appid>)
 
 =item  my $ua = $ylinks->user_agent;
