@@ -10,7 +10,7 @@ use HTTP::Headers ();
 
 use JSON ();
 
-$VERSION = '0.05';
+$VERSION = '0.06';
 
 sub new {
 	my $class = shift;
@@ -67,6 +67,8 @@ sub get {
 	my $resp = $self->{ua}->get ($query);
 	$result[1] = $resp;
 	
+	warn $resp->content;
+
 	if ($resp->is_success) {
 		my $parser = "$self->{format}_parser";
 		$self->$parser ($resp, \@result);
@@ -86,7 +88,14 @@ sub json_parser {
 	
 	my $content = $resp->content;
 	
-	if ($content =~ /limit exceeded/) {
+	# contents example:
+	#HTTP/1.1 999 Rate Limit Exceeded
+	#Date: Sun, 01 Mar 2009 11:26:23 GMT
+	#P3P: policyref="http://info.yahoo.com/w3c/p3p.xml", CP="CAO DSP COR CUR ADM DEV TAI PSA PSD IVAi IVDi CONi TELo OTPi OUR DELi SAMi OTRi UNRi PUBi IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC GOV"
+	#Connection: close
+	#Transfer-Encoding: chunked
+	#Content-Type: text/javascript; charset=utf-8
+	if ($content =~ /rate limit exceeded/si) {
 		# JSON cannot parse xml
 		return;
 	}
