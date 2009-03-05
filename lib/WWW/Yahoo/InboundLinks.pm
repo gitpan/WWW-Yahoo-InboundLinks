@@ -10,17 +10,24 @@ use HTTP::Headers ();
 
 use JSON ();
 
-$VERSION = '0.06';
+$VERSION = '0.07';
 
 sub new {
 	my $class = shift;
 	my $appid = shift;
-	my $self  = {@_};
+	
+	my %options = @_;
+	
+	my $self  = {};
 	
 	# config overrided by parameters
 	$self->{ua}     = LWP::UserAgent->new;
 	$self->{appid}  = $appid;
 	$self->{format} = 'json';
+	
+	foreach (keys %options) {
+		$self->{$_} = $options{$_};
+	}
 	
 	bless($self, $class);
 }
@@ -67,8 +74,6 @@ sub get {
 	my $resp = $self->{ua}->get ($query);
 	$result[1] = $resp;
 	
-	warn $resp->content;
-
 	if ($resp->is_success) {
 		my $parser = "$self->{format}_parser";
 		$self->$parser ($resp, \@result);

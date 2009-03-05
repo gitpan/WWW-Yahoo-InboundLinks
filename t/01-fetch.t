@@ -5,7 +5,7 @@ BEGIN { plan tests => 4 }
 use WWW::Yahoo::InboundLinks; 
 
 # please register your own yahoo app id when using this code in your application
-my $ylinks = WWW::Yahoo::InboundLinks->new (appid => 'kx3hFsLV34HOcYXmoaxIcWaD6CLVSVT2jOHKcnEnnjrOk3pB0b33I7uW0.OlBp8ksEk-');
+my $ylinks = WWW::Yahoo::InboundLinks->new ('kx3hFsLV34HOcYXmoaxIcWaD6CLVSVT2jOHKcnEnnjrOk3pB0b33I7uW0.OlBp8ksEk-');
 
 ok $ylinks;
 
